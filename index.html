@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Whisker.Lilyy — Pune's Coziest Cat Boarding Homestay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf6ee;
+    --warm-white: #fffaf4;
+    --blush: #f2cdb0;
+    --terracotta: #c97d55;
+    --deep-terracotta: #9e5c36;
+    --sage: #8aab8c;
+    --deep-sage: #5a7d5c;
+    --warm-brown: #4a2e1a;
+    --dusty-rose: #e8b4a0;
+    --soft-gold: #d4a96a;
+    --text-dark: #2d1a0e;
+    --text-mid: #6b4c35;
+    --text-light: #a07858;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text-dark);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* ─── NAVIGATION ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(253, 246, 238, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201, 125, 85, 0.12);
+    transition: all 0.3s ease;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--deep-terracotta);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .nav-logo span { font-style: italic; color: var(--terracotta); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 400;
+    color: var(--text-mid);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--terracotta); }
+
+  .nav-cta {
+    background: var(--terracotta);
+    color: white !important;
+    padding: 0.55rem 1.4rem;
+    border-radius: 50px;
+    font-size: 0.82rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.08em !important;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--deep-terracotta) !important; transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 6rem 3rem 3rem;
+    position: relative;
+    overflow: hidden;
+    gap: 4rem;
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .hero-bg-circle:nth-child(1) {
+    width: 600px; height: 600px;
+    background: var(--blush);
+    top: -100px; right: -100px;
+  }
+  .hero-bg-circle:nth-child(2) {
+    width: 400px; height: 400px;
+    background: var(--sage);
+    bottom: -80px; left: 20%;
+    opacity: 0.2;
+  }
+
+  .hero-content { position: relative; z-index: 2; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(138, 171, 140, 0.15);
+    border: 1px solid rgba(90, 125, 92, 0.25);
+    color: var(--deep-sage);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.45rem 1rem;
+    border-radius: 50px;
+    margin-bottom: 1.8rem;
+    animation: fadeSlideUp 0.8s ease forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    line-height: 1.1;
+    color: var(--warm-brown);
+    margin-bottom: 1.5rem;
+    animation: fadeSlideUp 0.8s ease 0.1s both;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--terracotta);
+    display: block;
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    line-height: 1.75;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+    animation: fadeSlideUp 0.8s ease 0.2s both;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    animation: fadeSlideUp 0.8s ease 0.3s both;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--terracotta);
+    color: white;
+    text-decoration: none;
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 20px rgba(201, 125, 85, 0.35);
+  }
+  .btn-primary:hover {
+    background: var(--deep-terracotta);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(201, 125, 85, 0.4);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--terracotta);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.9rem 1.5rem;
+    border: 1.5px solid var(--blush);
+    border-radius: 50px;
+    transition: all 0.25s;
+  }
+  .btn-secondary:hover {
+    background: var(--blush);
+    border-color: var(--terracotta);
+    transform: translateY(-2px);
+  }
+
+  /* hero image side */
+  .hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeSlideUp 1s ease 0.4s both;
+    z-index: 2;
+  }
+
+  .hero-cat-card {
+    background: var(--warm-white);
+    border-radius: 32px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 60px rgba(74, 46, 26, 0.1), 0 4px 16px rgba(201, 125, 85, 0.08);
+    border: 1px solid rgba(242, 205, 176, 0.5);
+    max-width: 380px;
+    width: 100%;
+    position: relative;
+  }
+
+  .cat-emoji-display {
+    font-size: 7rem;
+    text-align: center;
+    display: block;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 8px 24px rgba(201, 125, 85, 0.2));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .card-tag {
+    display: inline-block;
+    background: rgba(138, 171, 140, 0.15);
+    color: var(--deep-sage);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+  }
+
+  .card-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--warm-brown);
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .pill {
+    background: rgba(242, 205, 176, 0.4);
+    color: var(--deep-terracotta);
+    font-size: 0.75rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    border: 1px solid rgba(201, 125, 85, 0.2);
+  }
+
+  .floating-badge {
+    position: absolute;
+    background: white;
+    border-radius: 16px;
+    padding: 0.7rem 1rem;
+    box-shadow: 0 8px 24px rgba(74, 46, 26, 0.12);
+    border: 1px solid rgba(242, 205, 176, 0.6);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+  }
+  .floating-badge.top-right { top: -20px; right: -20px; animation: float 3.5s 0.5s ease-in-out infinite; }
+  .floating-badge.bottom-left { bottom: -18px; left: -18px; animation: float 4s 1s ease-in-out infinite; }
+
+  /* ─── SECTION SHARED ─── */
+  section { padding: 6rem 3rem; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    color: var(--warm-brown);
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--terracotta); }
+
+  .section-subtitle {
+    font-size: 1rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+    max-width: 540px;
+  }
+
+  /* ─── FEATURES STRIP ─── */
+  .features-strip {
+    background: var(--warm-brown);
+    padding: 2rem 3rem;
+    display: flex;
+    gap: 3rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .features-strip::-webkit-scrollbar { display: none; }
+
+  .strip-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    color: rgba(255,255,255,0.85);
+    font-size: 0.85rem;
+    font-weight: 400;
+    white-space: nowrap;
+    letter-spacing: 0.03em;
+  }
+  .strip-item .dot {
+    width: 6px; height: 6px;
+    background: var(--terracotta);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ─── HOME FEATURES ─── */
+  .home-features {
+    background: var(--warm-white);
+  }
+
+  .features-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .feature-card {
+    background: var(--cream);
+    border: 1px solid rgba(242, 205, 176, 0.5);
+    border-radius: 24px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--terracotta), var(--soft-gold));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(74, 46, 26, 0.1); }
+  .feature-card:hover::before { transform: scaleX(1); }
+
+  .feature-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .feature-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--warm-brown);
+    margin-bottom: 0.5rem;
+  }
+  .feature-desc {
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    line-height: 1.65;
+  }
+
+  /* ─── WHY US ─── */
+  .why-us {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 6rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .why-visual {
+    position: relative;
+  }
+
+  .big-emoji {
+    font-size: 10rem;
+    display: block;
+    text-align: center;
+    filter: drop-shadow(0 12px 40px rgba(201, 125, 85, 0.25));
+    animation: float 4.5s ease-in-out infinite;
+  }
+
+  .why-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .stat-card {
+    background: var(--warm-white);
+    border: 1px solid rgba(242, 205, 176, 0.5);
+    border-radius: 20px;
+    padding: 1.2rem;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--terracotta);
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .why-points {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-top: 2.5rem;
+  }
+
+  .why-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    background: var(--warm-white);
+    border-radius: 16px;
+    border: 1px solid rgba(242, 205, 176, 0.4);
+    transition: all 0.2s;
+  }
+  .why-point:hover {
+    border-color: var(--blush);
+    transform: translateX(6px);
+  }
+  .why-point-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .why-point-text strong {
+    display: block;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--warm-brown);
+    margin-bottom: 0.2rem;
+  }
+  .why-point-text span {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+
+  /* ─── SERVICES ─── */
+  .services-section {
+    background: linear-gradient(135deg, var(--warm-brown) 0%, #3a1e0d 100%);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .services-section::before {
+    content: '🐾';
+    position: absolute;
+    font-size: 20rem;
+    opacity: 0.04;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .services-section .section-label { color: var(--blush); }
+  .services-section .section-title { color: white; }
+  .services-section .section-title em { color: var(--blush); }
+  .services-section .section-subtitle { color: rgba(255,255,255,0.65); max-width: 100%; }
+
+  .services-header { margin-bottom: 3.5rem; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .service-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+    transition: all 0.3s;
+    backdrop-filter: blur(8px);
+  }
+  .service-card:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-5px);
+    border-color: rgba(242, 205, 176, 0.3);
+  }
+  .service-emoji { font-size: 2.5rem; display: block; margin-bottom: 0.8rem; }
+  .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: white;
+    margin-bottom: 0.4rem;
+  }
+  .service-desc { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  /* ─── PROMISE SECTION ─── */
+  .promise-section {
+    background: var(--cream);
+    text-align: center;
+  }
+
+  .promise-card {
+    background: linear-gradient(135deg, var(--warm-white), var(--cream));
+    border: 1px solid rgba(242, 205, 176, 0.6);
+    border-radius: 32px;
+    padding: 4rem 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(74, 46, 26, 0.08);
+  }
+
+  .promise-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(242, 205, 176, 0.3), transparent 60%),
+                radial-gradient(circle at 80% 80%, rgba(138, 171, 140, 0.15), transparent 50%);
+    pointer-events: none;
+  }
+
+  .promise-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: var(--warm-brown);
+    margin: 1.5rem 0 1rem;
+  }
+
+  .promise-text {
+    font-size: 1rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .location-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(201, 125, 85, 0.1);
+    border: 1px solid rgba(201, 125, 85, 0.25);
+    color: var(--terracotta);
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 2.5rem;
+  }
+
+  .promise-ctas {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ─── CONTACT / SOCIAL ─── */
+  .contact-section {
+    background: var(--warm-white);
+    padding: 4rem 3rem;
+  }
+
+  .contact-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--warm-brown);
+    margin-bottom: 1.2rem;
+  }
+  .contact-title em { font-style: italic; color: var(--terracotta); }
+
+  .contact-desc {
+    font-size: 0.92rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.4rem;
+    border-radius: 16px;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 1.5px solid transparent;
+  }
+  .contact-link.whatsapp {
+    background: rgba(37, 211, 102, 0.08);
+    border-color: rgba(37, 211, 102, 0.2);
+    color: #1a8a40;
+  }
+  .contact-link.instagram {
+    background: rgba(225, 48, 108, 0.07);
+    border-color: rgba(225, 48, 108, 0.2);
+    color: #c13584;
+  }
+  .contact-link:hover { transform: translateX(6px); filter: brightness(1.05); }
+
+  .contact-link-icon { font-size: 1.6rem; flex-shrink: 0; }
+  .contact-link-text strong { display: block; font-size: 0.88rem; font-weight: 500; margin-bottom: 0.1rem; }
+  .contact-link-text span { font-size: 0.78rem; opacity: 0.7; }
+
+  .contact-quote-card {
+    background: var(--cream);
+    border: 1px solid rgba(242, 205, 176, 0.5);
+    border-radius: 28px;
+    padding: 2.5rem;
+    text-align: center;
+  }
+  .contact-cat { font-size: 5rem; display: block; margin-bottom: 1rem; animation: float 5s ease-in-out infinite; }
+  .contact-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--warm-brown);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .contact-quote-sub { font-size: 0.82rem; color: var(--text-light); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--warm-brown);
+    color: rgba(255,255,255,0.7);
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: white;
+  }
+  .footer-brand span { font-style: italic; color: var(--blush); }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .footer-links a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--blush); }
+
+  .footer-copy { font-size: 0.78rem; }
+
+  /* ─── WHATSAPP FLOAT ─── */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    padding: 0.85rem 1.4rem 0.85rem 1rem;
+    border-radius: 50px;
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: all 0.25s;
+    animation: pulse-green 3s ease-in-out infinite;
+  }
+  .whatsapp-float:hover {
+    background: #20b857;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 10px 32px rgba(37, 211, 102, 0.5);
+    animation: none;
+  }
+  .whatsapp-float svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+  @keyframes pulse-green {
+    0%, 100% { box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4); }
+    50% { box-shadow: 0 6px 32px rgba(37, 211, 102, 0.65), 0 0 0 8px rgba(37, 211, 102, 0.1); }
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 5rem 1.5rem 3rem; gap: 2.5rem; }
+    .hero-visual { order: -1; }
+    section { padding: 4rem 1.5rem; }
+    .features-strip { padding: 1.5rem; justify-content: flex-start; }
+    .why-us { grid-template-columns: 1fr; gap: 3rem; }
+    .why-visual { text-align: center; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+    .floating-badge.top-right { top: -12px; right: -8px; font-size: 0.72rem; padding: 0.5rem 0.8rem; }
+    .floating-badge.bottom-left { bottom: -12px; left: -8px; font-size: 0.72rem; padding: 0.5rem 0.8rem; }
+    .whatsapp-float span { display: none; }
+    .whatsapp-float { padding: 1rem; border-radius: 50%; }
+    .promise-card { padding: 2.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#" class="nav-logo">Whisker<span>.Lilyy</span></a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://wa.me/918483961083?text=Hi%21+I%27d+like+to+book+a+stay+for+my+cat+%F0%9F%90%B1" target="_blank" class="nav-links a nav-cta">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="home">
+  <div class="hero-bg-circle"></div>
+  <div class="hero-bg-circle"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">🐾 Cage-free • Pune's Coziest Homestay</div>
+    <h1 class="hero-title">
+      Your cat deserves<br>
+      <em>a home, not a cage</em>
+    </h1>
+    <p class="hero-subtitle">
+      At Whisker.Lilyy, we believe every cat deserves comfort, freedom, and love — even when you're away. A peaceful, home-style boarding experience right here in Pune. 🏠🐱
+    </p>
+    <div class="hero-actions">
+      <a href="https://wa.me/918483961083?text=Hi%21+I%27d+like+to+book+a+stay+for+my+cat+%F0%9F%90%B1" target="_blank" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Book a Stay
+      </a>
+      <a href="https://www.instagram.com/whisker.lilyy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        Follow Us
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-cat-card">
+      <span class="cat-emoji-display">😸</span>
+      <span class="card-tag">🏠 Pune Homestay</span>
+      <p class="card-quote">"Whisker.Lilyy feels like home — because it is."</p>
+      <div class="card-pills">
+        <span class="pill">Cage-Free</span>
+        <span class="pill">24/7 Supervision</span>
+        <span class="pill">Spacious 2BHK</span>
+        <span class="pill">Daily Updates</span>
+      </div>
+      <div class="floating-badge top-right">🌿 Netted Balcony</div>
+      <div class="floating-badge bottom-left">❄️ AC / Cooler Setup</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FEATURE STRIP ─── -->
+<div class="features-strip">
+  <div class="strip-item"><div class="dot"></div>No Cages. Ever.</div>
+  <div class="strip-item"><div class="dot"></div>Spacious 2BHK Home</div>
+  <div class="strip-item"><div class="dot"></div>24/7 Human Supervision</div>
+  <div class="strip-item"><div class="dot"></div>Fresh Air Balcony</div>
+  <div class="strip-item"><div class="dot"></div>Regular Litter Cleaning</div>
+  <div class="strip-item"><div class="dot"></div>Toys & Enrichment</div>
+  <div class="strip-item"><div class="dot"></div>Daily Photo Updates</div>
+</div>
+
+<!-- ─── HOME FEATURES ─── -->
+<section class="home-features" id="features">
+  <div class="features-header reveal">
+    <div class="section-label">The Whisker.Lilyy Difference</div>
+    <h2 class="section-title">A Home Away From <em>Home</em></h2>
+    <p class="section-subtitle" style="margin:0 auto">Forget stressful cages and crowded pet hostels. Every corner here is designed to make your cat feel calm, comfortable, and truly cared for.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <span class="feature-icon">🏠</span>
+      <div class="feature-title">Spacious 2BHK Freedom</div>
+      <p class="feature-desc">Full roaming access through a cozy, cat-proofed 2BHK. No crates, no compartments — just genuine living space.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🌿</span>
+      <div class="feature-title">Safe Netted Balcony</div>
+      <p class="feature-desc">A large, fully netted balcony for fresh air, birding, and that purr-fect afternoon nap in the breeze.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🚽</span>
+      <div class="feature-title">Hygienic Litter Setup</div>
+      <p class="feature-desc">Separate, regularly cleaned litter boxes placed thoughtfully — because hygiene is non-negotiable.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">💧</span>
+      <div class="feature-title">Water Everywhere</div>
+      <p class="feature-desc">Fresh water bowls placed throughout the home for easy access — we take hydration seriously.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">❄️</span>
+      <div class="feature-title">Cool Pune Summers</div>
+      <p class="feature-desc">Cooler setup to keep cats comfortable through Pune's hot summers. Your baby stays cool and relaxed.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🎮</span>
+      <div class="feature-title">Enrichment & Play</div>
+      <p class="feature-desc">Tunnels, feather toys, and playtime activities curated for endless fun, whether your cat is shy or mischievous.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">👀</span>
+      <div class="feature-title">24/7 Human Supervision</div>
+      <p class="feature-desc">Your baby is never left alone. We're always present, always watching, always caring — day and night.</p>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">📸</span>
+      <div class="feature-title">Regular Parent Updates</div>
+      <p class="feature-desc">Photos, videos, and updates sent directly to you. So you can relax on your trip, fully reassured.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY US ─── -->
+<section style="padding: 6rem 3rem;" id="why">
+  <div class="why-us">
+    <div class="why-visual reveal">
+      <span class="big-emoji">🐱</span>
+      <div class="why-stats">
+        <div class="stat-card">
+          <span class="stat-num">0</span>
+          <span class="stat-label">Cages Used</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">24/7</span>
+          <span class="stat-label">Supervision</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Cage-Free</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">💯</span>
+          <span class="stat-label">Loving Care</span>
+        </div>
+      </div>
+    </div>
+    <div class="why-content reveal">
+      <div class="section-label">Why Cat Parents Love Us</div>
+      <h2 class="section-title">Your cat isn't a guest.<br><em>They're family.</em></h2>
+      <div class="why-points">
+        <div class="why-point">
+          <span class="why-point-icon">🚫</span>
+          <div class="why-point-text">
+            <strong>No Cages. Ever.</strong>
+            <span>Every cat deserves to roam free. We've built our entire space around that belief.</span>
+          </div>
+        </div>
+        <div class="why-point">
+          <span class="why-point-icon">🏡</span>
+          <div class="why-point-text">
+            <strong>Calm Home Environment</strong>
+            <span>No barking dogs, no chaos — just a serene home perfect for cats of all personalities.</span>
+          </div>
+        </div>
+        <div class="why-point">
+          <span class="why-point-icon">🤗</span>
+          <div class="why-point-text">
+            <strong>Personalized Attention</strong>
+            <span>Shy, playful, or cuddly — we adapt to every cat's unique personality and needs.</span>
+          </div>
+        </div>
+        <div class="why-point">
+          <span class="why-point-icon">✈️</span>
+          <div class="why-point-text">
+            <strong>Stress-Free for You Too</strong>
+            <span>Travel with peace of mind knowing your fur baby is safe, happy, and loved.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SERVICES ─── -->
+<section class="services-section" id="services">
+  <div class="services-header reveal">
+    <div class="section-label">What We Offer</div>
+    <h2 class="section-title">Services We <em>Offer</em></h2>
+    <p class="section-subtitle" style="margin: 0.8rem auto 0; max-width:520px">From overnight boarding to daycare, grooming to fostering — everything your cat needs, under one loving roof.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-emoji">🌙</span>
+      <div class="service-name">Cat Boarding</div>
+      <p class="service-desc">Overnight or extended stays in our cage-free home environment</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-emoji">✂️</span>
+      <div class="service-name">Cat Grooming</div>
+      <p class="service-desc">Professional grooming to keep your kitty looking and feeling fresh</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-emoji">🏠</span>
+      <div class="service-name">Cat Sitting</div>
+      <p class="service-desc">In-home sitting so your cat stays in their familiar territory</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-emoji">☀️</span>
+      <div class="service-name">Cat Day Care</div>
+      <p class="service-desc">Daytime care so your kitty isn't home alone while you work</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-emoji">🤲</span>
+      <div class="service-name">Affordable Fostering</div>
+      <p class="service-desc">Temporary foster home for cats that need a safe, loving space</p>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-emoji">🛡️</span>
+      <div class="service-name">Emergency Cat Care</div>
+      <p class="service-desc">Short notice or emergency care when life takes unexpected turns</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROMISE ─── -->
+<section class="promise-section">
+  <div class="promise-card reveal">
+    <span style="font-size:3.5rem">✨</span>
+    <h2 class="promise-title">Because Your Cat Deserves Better</h2>
+    <p class="promise-text">Whether you're travelling for work, vacation, or emergencies — you can relax knowing your cat is safe, loved, and living like royalty at Whisker.Lilyy.</p>
+    <div class="location-badge">📍 Based in Pune &nbsp;·&nbsp; 🐱 Safe · Hygienic · Cage-Free · Loving</div>
+    <div class="promise-ctas">
+      <a href="https://wa.me/918483961083?text=Hi%21+I%27d+like+to+book+a+stay+for+my+cat+%F0%9F%90%B1" target="_blank" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Book on WhatsApp
+      </a>
+      <a href="https://www.instagram.com/whisker.lilyy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        See Us on Instagram
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="contact-title">Book your cat's<br><em>stay today</em></h2>
+      <p class="contact-desc">We'd love to meet your fur baby! Reach out on WhatsApp to ask questions, check availability, or book a stay — we respond quickly.</p>
+      <div class="contact-links">
+        <a href="https://wa.me/918483961083?text=Hi%21+I%27d+like+to+book+a+stay+for+my+cat+%F0%9F%90%B1" target="_blank" class="contact-link whatsapp">
+          <span class="contact-link-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </span>
+          <div class="contact-link-text">
+            <strong>Chat on WhatsApp</strong>
+            <span>+91 84839 61083 · Tap to message</span>
+          </div>
+        </a>
+        <a href="https://www.instagram.com/whisker.lilyy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="contact-link instagram">
+          <span class="contact-link-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </span>
+          <div class="contact-link-text">
+            <strong>Follow on Instagram</strong>
+            <span>@whisker.lilyy · See daily cat updates</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="contact-quote-card reveal">
+      <span class="contact-cat">🐾</span>
+      <p class="contact-quote">"Every cat that walks through our door becomes a part of our family — until yours comes home."</p>
+      <p class="contact-quote-sub">— Whisker.Lilyy, Pune 🏠</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-brand">Whisker<span>.Lilyy</span> &nbsp;🐾</div>
+  <ul class="footer-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="https://wa.me/918483961083" target="_blank">WhatsApp</a></li>
+    <li><a href="https://www.instagram.com/whisker.lilyy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">Instagram</a></li>
+  </ul>
+  <span class="footer-copy">© 2025 Whisker.Lilyy · Pune · Made with 🐱 love</span>
+</footer>
+
+<!-- ─── WHATSAPP FLOATING BUTTON ─── -->
+<a href="https://wa.me/918483961083?text=Hi%21+I%27d+like+to+book+a+stay+for+my+cat+%F0%9F%90%B1" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  <span>Book a Stay</span>
+</a>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav shadow on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 20 ? '0 2px 20px rgba(74,46,26,0.1)' : 'none';
+  });
+</script>
+</body>
+</html>
